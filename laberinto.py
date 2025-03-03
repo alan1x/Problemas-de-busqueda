@@ -1,6 +1,5 @@
 from pyamaze import maze,agent,COLOR
 from queue import PriorityQueue
-import numpy as np
 def h(cell1,cell2):
     x1,y1=cell1
     x2,y2=cell2
@@ -71,6 +70,7 @@ def dfs(m,final=(1,1),origen=(5,5)):
         final=dfscamino[final]
 
     return camino_real
+
 def bfs(m,final=(1,1),origen=(5,5)):
     explorados=[origen]
     frontera=[origen]
@@ -105,21 +105,22 @@ def bfs(m,final=(1,1),origen=(5,5)):
 
 
 if __name__=='__main__':
-    x=9
-    y=19
+    x=1
+    y=1
     objetivo=(x,y)
-    n=9
-    m=20
-    origen=(1,2)
+    n=50
+    m=50
+    origen=(n,m)
     m=maze(n,m)
-    m.CreateMaze(x,y,loadMaze='laberinto.csv')
+    #m.CreateMaze(x,y,loadMaze='laberinto.csv')
+    m.CreateMaze(x,y)
     path=aStar(m,objetivo,origen)
     path2=dfs(m,objetivo,origen)
     path3=bfs(m,objetivo,origen)
     a=agent(m,footprints=True,filled=True,color=COLOR.red,x=origen[0],y=origen[1])
     a2=agent(m,footprints=True,filled=True,color=COLOR.green,x=origen[0],y=origen[1])
     a3=agent(m,footprints=True,filled=True,x=origen[0],y=origen[1])
-    m.tracePath({a:path},delay=200,kill=True)
-    m.tracePath({a2:path2},delay=200,kill=True)
-    m.tracePath({a3:path3},delay=200)
+    m.tracePath({a:path},delay=10,kill=True)
+    m.tracePath({a2:path2},delay=10,kill=True)
+    m.tracePath({a3:path3},delay=10)
     m.run()
