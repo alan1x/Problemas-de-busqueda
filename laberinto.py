@@ -106,21 +106,21 @@ def bfs(m,final=(1,1),origen=(5,5)):
 
 if __name__=='__main__':
     x=1
-    y=1
-    objetivo=(x,y)
-    n=50
-    m=50
-    origen=(n,m)
+    y=2
+    n=9
+    m=20
+    objetivo=(n,m)
+    origen=(x,y)
     m=maze(n,m)
-    #m.CreateMaze(x,y,loadMaze='laberinto.csv')
-    m.CreateMaze(x,y)
+    m.CreateMaze(objetivo[0],objetivo[1],loadMaze='laberinto.csv')
+    #m.CreateMaze(x,y)
     path=aStar(m,objetivo,origen)
     path2=dfs(m,objetivo,origen)
     path3=bfs(m,objetivo,origen)
     a=agent(m,footprints=True,filled=True,color=COLOR.red,x=origen[0],y=origen[1])
     a2=agent(m,footprints=True,filled=True,color=COLOR.green,x=origen[0],y=origen[1])
     a3=agent(m,footprints=True,filled=True,x=origen[0],y=origen[1])
-    m.tracePath({a:path},delay=10,kill=True)
-    m.tracePath({a2:path2},delay=10,kill=True)
-    m.tracePath({a3:path3},delay=10)
+    m.tracePath({a:path},delay=50,kill=True)
+    m.tracePath({a2:path2},delay=50,kill=True)
+    m.tracePath({a3:path3},delay=50)
     m.run()
